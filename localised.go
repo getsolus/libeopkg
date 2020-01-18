@@ -25,14 +25,21 @@
 // the new `libsol` component on the C library using cgo.
 package libeopkg
 
-import (
-	"errors"
-)
+// LocalisedField is used in various parts of the eopkg metadata to provide
+// a field value with an xml:lang attribute describing the language
+type LocalisedField struct {
+	Value string `xml:",cdata"`
+	Lang  string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
+}
 
-var (
-	// ErrNotYetImplemented is a placeholder during development
-	ErrNotYetImplemented = errors.New("Not yet implemented")
-
-	// ErrEopkgCorrupted is provided when a file does not conform to eopkg spec
-	ErrEopkgCorrupted = errors.New(".eopkg file is corrupted or invalid")
-)
+// FixMissingLocalLanguage should be used on a set of LocalisedField to restore
+// the missing "en" that is required in the very first field set.
+func FixMissingLocalLanguage(fields *[]LocalisedField) {
+	if fields == nil {
+		return
+	}
+	field := &(*fields)[0]
+	if field.Lang == "" {
+		field.Lang = "en"
+	}
+}

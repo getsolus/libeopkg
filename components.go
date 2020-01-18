@@ -1,5 +1,5 @@
 //
-// Copyright © 2017-2019 Solus Project
+// Copyright © 2017-2020 Solus Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,61 +22,74 @@ import (
 	"sort"
 )
 
+const (
+	// DefaultMaintainerName is the catch-all name for Solus maintainers
+	DefaultMaintainerName = "Solus Team"
+	// DefaultMaintainerEmail is the catch-all email for Solus maintainers
+	DefaultMaintainerEmail = "root@solus-project.com"
+)
+
 // A Component as seen through the eyes of XML
 type Component struct {
-	Name string // ID of this component, i.e. "system.base"
-
+	// ID of this component, i.e. "system.base"
+	Name string
 	// Translated short name
 	LocalName []LocalisedField
-
 	// Translated summary
 	Summary []LocalisedField
-
 	// Translated description
 	Description []LocalisedField
-
-	Group      string // Which group this component belongs to
+	// Which group this component belongs to
+	Group string
+	// Maintainer for this component
 	Maintainer struct {
-		Name  string // Name of the component maintainer
+		// Name of the component maintainer
+		Name string
+		// Contact e-mail address of component maintainer
 		Email string // Contact e-mail address of component maintainer
 	}
 }
 
 // Components is a simple helper wrapper for loading from components.xml files
 type Components struct {
-	Components []Component `xml:"Components>Component"`
+	// Components is a list of Components
+	Components ComponentList `xml:"Components>Component"`
 }
 
-// ComponentSort allows us to quickly sort our components by name
-type ComponentSort []Component
+// ComponentList allows us to quickly sort our components by name
+type ComponentList []Component
 
-func (g ComponentSort) Len() int {
-	return len(g)
+// Len returns the length of a ComponentList
+func (l ComponentList) Len() int {
+	return len(l)
 }
 
-func (g ComponentSort) Less(a, b int) bool {
-	return g[a].Name < g[b].Name
+// Less returns true if the name of the first component is a lower value
+func (l ComponentList) Less(a, b int) bool {
+	return l[a].Name < l[b].Name
 }
 
-func (g ComponentSort) Swap(a, b int) {
-	g[a], g[b] = g[b], g[a]
+// Swap exchanges two components for sorting
+func (l ComponentList) Swap(a, b int) {
+	l[a], l[b] = l[b], l[a]
 }
 
 // NewComponents will load the Components data from the XML file
 func NewComponents(xmlfile string) (cs *Components, err error) {
+	// Open the component file
 	cFile, err := os.Open(xmlfile)
 	if err != nil {
 		return
 	}
 	defer cFile.Close()
+	// Decode the file contents
 	cs = &Components{}
 	dec := xml.NewDecoder(cFile)
 	if err = dec.Decode(cs); err != nil {
 		return
 	}
 	// Sort components by name
-	sort.Sort(ComponentSort(cs.Components))
-
+	sort.Sort(cs.Components)
 	// Ensure there are no empty Lang= fields
 	for i := range cs.Components {
 		comp := &cs.Components[i]

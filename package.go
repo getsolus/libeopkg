@@ -1,5 +1,5 @@
 //
-// Copyright © 2017-2019 Solus Project
+// Copyright © 2017-2020 Solus Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -43,22 +43,28 @@ import (
 // is presently written in Python.
 //
 type Package struct {
-	Path  string    // Path to this .eopkg file
-	ID    string    // Basename of the package, unique.
-	Meta  *Metadata // Metadata for this package
-	Files *Files    // Files for this package
-
-	zipFile *zip.ReadCloser // .eopkg is a zip archvie
+	// Path to this .eopkg file
+	Path string
+	// Basename of the package, unique.
+	ID string
+	// Metadata for this package
+	Meta *Metadata
+	// Files for this package
+	Files *Files
+	// .eopkg is a zip archive
+	zipFile *zip.ReadCloser
 }
 
 // Open will attempt to open the given .eopkg file.
 // This must be a valid .eopkg file and this stage will assert that it is
 // indeed a real archive.
 func Open(path string) (*Package, error) {
+	// Create package object
 	ret := &Package{
 		Path: path,
 		ID:   filepath.Base(path),
 	}
+	// Open package file
 	zipFile, err := zip.OpenReader(path)
 	if err != nil {
 		return nil, err
@@ -82,7 +88,9 @@ func (p *Package) Close() error {
 // we return nil. The caller should then bail and indicate
 // that the eopkg is corrupted.
 func (p *Package) FindFile(path string) *zip.File {
+	// Iterate over all files
 	for _, f := range p.zipFile.File {
+		// Check for match
 		if path == f.Name {
 			return f
 		}
@@ -93,9 +101,11 @@ func (p *Package) FindFile(path string) *zip.File {
 // ReadMetadata will read the `metadata.xml` file within the archive and
 // deserialize it into something accessible within the .eopkg container.
 func (p *Package) ReadMetadata() error {
+	// Already read metadata
 	if p.Meta != nil {
 		return nil
 	}
+	// Open the metadata file
 	metaFile := p.FindFile("metadata.xml")
 	if metaFile == nil {
 		return ErrEopkgCorrupted
@@ -105,13 +115,14 @@ func (p *Package) ReadMetadata() error {
 		return err
 	}
 	defer fi.Close()
+	// Decode its contents
 	metadata := &Metadata{}
 	dec := xml.NewDecoder(fi)
 	if err = dec.Decode(metadata); err != nil {
 		return err
 	}
 	p.Meta = metadata
-	// Clean up extra junk
+	// Remove extraneous spaces and fix missing localised fields
 	for i := range p.Meta.Package.Summary {
 		sum := &p.Meta.Package.Summary[i]
 		sum.Value = strings.TrimSpace(sum.Value)
@@ -128,9 +139,11 @@ func (p *Package) ReadMetadata() error {
 // ReadFiles will read the `files.xml` file within the archive and
 // deserialize it into something accessible within the .eopkg container.
 func (p *Package) ReadFiles() error {
+	// Already read Files
 	if p.Files != nil {
 		return nil
 	}
+	// Open the files list
 	files := p.FindFile("files.xml")
 	if files == nil {
 		return ErrEopkgCorrupted
@@ -140,14 +153,15 @@ func (p *Package) ReadFiles() error {
 		return err
 	}
 	defer fi.Close()
+	// Decode its contents
 	ret := &Files{}
 	dec := xml.NewDecoder(fi)
 	if err = dec.Decode(ret); err != nil {
 		return err
 	}
-	// Ensure file modes are accessible
+	// Convert file modes from strings to ints
 	for _, f := range ret.File {
-		if err := f.initFileMode(); err != nil {
+		if err := f.ParseFileMode(); err != nil {
 			return err
 		}
 	}
@@ -166,8 +180,8 @@ func (p *Package) ReadAll() error {
 // ExtractTarball will fully extract install.tar.xz to the destination
 // direction + install.tar suffix
 func (p *Package) ExtractTarball(directory string) error {
+	// Open tarball
 	xzName := filepath.Join(directory, "install.tar.xz")
-
 	tarball := p.FindFile("install.tar.xz")
 	if tarball == nil {
 		return ErrEopkgCorrupted
@@ -178,13 +192,27 @@ func (p *Package) ExtractTarball(directory string) error {
 		return err
 	}
 	defer fi.Close()
+	// Create destination tarball
 	outF, err := os.Create(xzName)
 	if err != nil {
 		return err
 	}
 	defer outF.Close()
+	// Copy the entire tarball
 	if _, err = io.Copy(outF, fi); err != nil {
 		return err
 	}
+	// Uncompress the tarball
 	return UnxzFile(xzName, false)
+}
+
+// filesToMap is a helper that will let us uniquely index hash to file-set
+func (p *Package) filesToMap() (ret map[string][]*File) {
+	ret = make(map[string][]*File)
+	// For each file in files
+	for _, f := range p.Files.File {
+		// Append it to a list of files with the same hash
+		ret[f.Hash] = append(ret[f.Hash], f)
+	}
+	return ret
 }

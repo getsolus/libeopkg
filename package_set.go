@@ -25,14 +25,20 @@
 // the new `libsol` component on the C library using cgo.
 package libeopkg
 
-import (
-	"errors"
-)
+// PackageSet provides sorting capabilities for a slice of packages
+type PackageSet []*MetaPackage
 
-var (
-	// ErrNotYetImplemented is a placeholder during development
-	ErrNotYetImplemented = errors.New("Not yet implemented")
+// Len returns the size of the PackageSet for sorting
+func (p PackageSet) Len() int {
+	return len(p)
+}
 
-	// ErrEopkgCorrupted is provided when a file does not conform to eopkg spec
-	ErrEopkgCorrupted = errors.New(".eopkg file is corrupted or invalid")
-)
+// Less returns true if Release A is less than Release B
+func (p PackageSet) Less(a, b int) bool {
+	return p[a].GetRelease() < p[b].GetRelease()
+}
+
+// Swap exchanges packages when sorting
+func (p PackageSet) Swap(a, b int) {
+	p[a], p[b] = p[b], p[a]
+}

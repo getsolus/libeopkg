@@ -1,5 +1,5 @@
 //
-// Copyright © 2017-2019 Solus Project
+// Copyright © 2017-2020 Solus Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ import (
 
 // Our test files, known to produce a valid delta package
 const (
-	deltaOldPkg = "testdata/delta/nano-2.8.5-75-1-x86_64.eopkg"
-	deltaNewPkg = "testdata/delta/nano-2.8.6-76-1-x86_64.eopkg"
+	deltaOldPkg = "testdata/delta/nano-4.6-117-1-x86_64.eopkg"
+	deltaNewPkg = "testdata/delta/nano-4.7-118-1-x86_64.eopkg"
 	notAFile    = "testdata/bob"
 	notAPkg     = "testdata/not.xml"
 )
@@ -35,7 +35,7 @@ func TestBasicDelta(t *testing.T) {
 		t.Fatalf("Failed to create delta producer for existing pkgs: %v", err)
 	}
 	defer producer.Close()
-	path, err := producer.Commit()
+	path, err := producer.Create()
 	if err != nil {
 		t.Fatalf("Failed to produce delta packages: %v", err)
 	}
@@ -52,10 +52,9 @@ func TestBasicDelta(t *testing.T) {
 	if pkg.Meta.Package.Name != "nano" {
 		t.Fatalf("Invalid delta name: %s", pkg.Meta.Package.Name)
 	}
-	if pkg.Meta.Package.GetRelease() != 76 {
+	if pkg.Meta.Package.GetRelease() != 118 {
 		t.Fatalf("Invalid release number in delta: %d", pkg.Meta.Package.GetRelease())
 	}
-
 }
 
 func TestBasicDeltaOldMissing(t *testing.T) {

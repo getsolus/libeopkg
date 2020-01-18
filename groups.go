@@ -1,5 +1,5 @@
 //
-// Copyright © 2017-2019 Solus Project
+// Copyright © 2017-2020 Solus Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -24,47 +24,53 @@ import (
 
 // A Group as seen through the eyes of XML
 type Group struct {
-	Name string // ID of this group, i.e. "multimedia"
-
+	// ID of this group, i.e. "multimedia"
+	Name string
 	// Translated short name
 	LocalName []LocalisedField
-
-	Icon string // Display icon for this Group
+	// Display icon for this Group
+	Icon string
 }
 
 // Groups is a simple helper wrapper for loading from components.xml files
 type Groups struct {
-	Groups []Group `xml:"Groups>Group"`
+	Groups GroupList `xml:"Groups>Group"`
 }
 
-// GroupSort allows us to quickly sort our groups by name
-type GroupSort []Group
+// GroupList allows us to quickly sort our groups by name
+type GroupList []Group
 
-func (g GroupSort) Len() int {
-	return len(g)
+// Len returns the size of the list for sorting
+func (l GroupList) Len() int {
+	return len(l)
 }
 
-func (g GroupSort) Less(a, b int) bool {
-	return g[a].Name < g[b].Name
+// Less returns true if the name of Group A is less than Group B's
+func (l GroupList) Less(a, b int) bool {
+	return l[a].Name < l[b].Name
 }
 
-func (g GroupSort) Swap(a, b int) {
-	g[a], g[b] = g[b], g[a]
+// Swap exchanges groups while sorting
+func (l GroupList) Swap(a, b int) {
+	l[a], l[b] = l[b], l[a]
 }
 
 // NewGroups will load the Groups data from the XML file
 func NewGroups(xmlfile string) (*Groups, error) {
+	// Open the groups file
 	fi, err := os.Open(xmlfile)
 	if err != nil {
 		return nil, err
 	}
 	defer fi.Close()
+	// Decode the contents
 	grp := &Groups{}
 	dec := xml.NewDecoder(fi)
 	if err = dec.Decode(grp); err != nil {
 		return nil, err
 	}
-	sort.Sort(GroupSort(grp.Groups))
+	// Sort the groups
+	sort.Sort(grp.Groups)
 	// Ensure there are no empty Lang= fields
 	for i := range grp.Groups {
 		group := &grp.Groups[i]

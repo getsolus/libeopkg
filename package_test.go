@@ -1,5 +1,5 @@
 //
-// Copyright © 2017-2019 Solus Project
+// Copyright © 2017-2020 Solus Project
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import (
 )
 
 const (
-	eopkgTestFile = "testdata/nano-2.7.1-63-1-x86_64.eopkg"
+	eopkgTestFile = "testdata/nano-4.7-118-1-x86_64.eopkg"
 )
 
 // TestPackageOpen will validate simple open of package files
