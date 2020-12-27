@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <PISI>
 	<Groups>
 		<Group>
@@ -28,7 +27,6 @@
 			<LocalName xml:lang="zh_CN">系统软件</LocalName>
 			<Icon>applications-system</Icon>
 		</Group>
-		
 		<Group>
 			<Name>network</Name>
 			<LocalName>Internet Software</LocalName>
@@ -56,7 +54,6 @@
 			<LocalName xml:lang="zh_CN">互联网软件</LocalName>
 			<Icon>network</Icon>
 		</Group>
-
 		<Group>
 			<Name>multimedia</Name>
 			<LocalName>Multimedia &amp; Graphics</LocalName>
@@ -84,7 +81,6 @@
 			<LocalName xml:lang="zh_CN">多媒体 &amp; 图形</LocalName>
 			<Icon>multimedia-volume-control</Icon>
 		</Group>
-
 		<Group>
 			<Name>gaming</Name>
 			<LocalName>Gaming on Solus</LocalName>
@@ -112,7 +108,6 @@
 			<LocalName xml:lang="zh_CN">在 Solus 上玩游戏</LocalName>
 			<Icon>input-gaming</Icon>
 		</Group>
-
 		<Group>
 			<Name>office</Name>
 			<LocalName>Office Software</LocalName>
@@ -140,7 +135,6 @@
 			<LocalName xml:lang="zh_CN">办公软件</LocalName>
 			<Icon>text-editor</Icon>
 		</Group>
-
 		<Group>
 			<Name>programming</Name>
 			<LocalName>Programming Languages &amp; Tools</LocalName>
@@ -168,7 +162,6 @@
 			<LocalName xml:lang="zh_CN">编程语言 &amp; 工具</LocalName>
 			<Icon>redhat-programming</Icon>
 		</Group>
-
 		<Group>
 			<Name>desktop</Name>
 			<LocalName>Desktop Software &amp; Theming</LocalName>
@@ -221,6 +214,5 @@
 			<LocalName xml:lang="zh_CN">安全软件</LocalName>
 			<Icon>security-high</Icon>
 		</Group>
-										
 	</Groups>
 </PISI>

@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-package libeopkg
+package archive
 
 import (
 	"fmt"
@@ -23,7 +23,7 @@ import (
 )
 
 const (
-	eopkgTestFile = "testdata/nano-4.7-118-1-x86_64.eopkg"
+	eopkgTestFile = "../testdata/nano-4.7-118-1-x86_64.eopkg"
 )
 
 // TestPackageOpen will validate simple open of package files

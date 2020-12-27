@@ -14,10 +14,11 @@
 // limitations under the License.
 //
 
-package libeopkg
+package index
 
 import (
 	"encoding/xml"
+	"github.com/getsolus/libeopkg/shared"
 	"os"
 )
 
@@ -26,16 +27,18 @@ type Distribution struct {
 	// Name of source to match source repos
 	SourceName string
 	// Translated description
-	Description []LocalisedField
+	Description shared.LocalisedFields
 	// Published version number for compatibility
-	Version string
+	Version int
 	// Type of repository (should always be main, really. Just descriptive)
 	Type string
 	// Name of the binary repository
 	BinaryName string
 	// Package names that are no longer supported
 	Obsoletes []string `xml:"Obsoletes>Package"`
-	obsmap    map[string]bool
+
+	// fast lookup of obsoletes
+	obsmap map[string]bool
 }
 
 // NewDistribution will load the Distribution data from the XML file

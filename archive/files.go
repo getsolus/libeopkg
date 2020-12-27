@@ -14,9 +14,10 @@
 // limitations under the License.
 //
 
-package libeopkg
+package archive
 
 import (
+	"github.com/getsolus/libeopkg/shared"
 	"os"
 	"strconv"
 )
@@ -36,7 +37,7 @@ import (
 // Long story short: Wait for eopkg's successor to worry about this stuff.
 type File struct {
 	Path      string
-	Type      string
+	Type      shared.FileType
 	Size      int64  `xml:",omitempty"`
 	UID       int    `xml:"UID,omitempty"`
 	GID       int    `xml:"GID,omitempty"`

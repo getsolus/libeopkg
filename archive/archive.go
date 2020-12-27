@@ -14,11 +14,12 @@
 // limitations under the License.
 //
 
-package libeopkg
+package archive
 
 import (
 	"archive/zip"
 	"encoding/xml"
+	"github.com/getsolus/libeopkg/shared"
 	"io"
 	"os"
 	"path/filepath"
@@ -108,7 +109,7 @@ func (p *Package) ReadMetadata() error {
 	// Open the metadata file
 	metaFile := p.FindFile("metadata.xml")
 	if metaFile == nil {
-		return ErrEopkgCorrupted
+		return shared.ErrEopkgCorrupted
 	}
 	fi, err := metaFile.Open()
 	if err != nil {
@@ -127,12 +128,12 @@ func (p *Package) ReadMetadata() error {
 		sum := &p.Meta.Package.Summary[i]
 		sum.Value = strings.TrimSpace(sum.Value)
 	}
-	FixMissingLocalLanguage(&p.Meta.Package.Summary)
+	p.Meta.Package.Summary.FixMissingLocalLanguage()
 	for i := range p.Meta.Package.Description {
 		desc := &p.Meta.Package.Description[i]
 		desc.Value = strings.TrimSpace(desc.Value)
 	}
-	FixMissingLocalLanguage(&p.Meta.Package.Description)
+	p.Meta.Package.Description.FixMissingLocalLanguage()
 	return nil
 }
 
@@ -146,7 +147,7 @@ func (p *Package) ReadFiles() error {
 	// Open the files list
 	files := p.FindFile("files.xml")
 	if files == nil {
-		return ErrEopkgCorrupted
+		return shared.ErrEopkgCorrupted
 	}
 	fi, err := files.Open()
 	if err != nil {
@@ -184,7 +185,7 @@ func (p *Package) ExtractTarball(directory string) error {
 	xzName := filepath.Join(directory, "install.tar.xz")
 	tarball := p.FindFile("install.tar.xz")
 	if tarball == nil {
-		return ErrEopkgCorrupted
+		return shared.ErrEopkgCorrupted
 	}
 
 	fi, err := tarball.Open()

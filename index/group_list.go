@@ -14,23 +14,13 @@
 // limitations under the License.
 //
 
-package libeopkg
+package index
 
 import (
 	"encoding/xml"
 	"os"
 	"sort"
 )
-
-// A Group as seen through the eyes of XML
-type Group struct {
-	// ID of this group, i.e. "multimedia"
-	Name string
-	// Translated short name
-	LocalName []LocalisedField
-	// Display icon for this Group
-	Icon string
-}
 
 // Groups is a simple helper wrapper for loading from components.xml files
 type Groups struct {
@@ -46,35 +36,35 @@ func (l GroupList) Len() int {
 }
 
 // Less returns true if the name of Group A is less than Group B's
-func (l GroupList) Less(a, b int) bool {
-	return l[a].Name < l[b].Name
+func (l GroupList) Less(i, j int) bool {
+	return l[i].Name < l[j].Name
 }
 
 // Swap exchanges groups while sorting
-func (l GroupList) Swap(a, b int) {
-	l[a], l[b] = l[b], l[a]
+func (l GroupList) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
 }
 
 // NewGroups will load the Groups data from the XML file
-func NewGroups(xmlfile string) (*Groups, error) {
+func NewGroups(xmlfile string) (gs *Groups, err error) {
 	// Open the groups file
-	fi, err := os.Open(xmlfile)
+	f, err := os.Open(xmlfile)
 	if err != nil {
-		return nil, err
+		return
 	}
-	defer fi.Close()
+	defer f.Close()
 	// Decode the contents
-	grp := &Groups{}
-	dec := xml.NewDecoder(fi)
-	if err = dec.Decode(grp); err != nil {
-		return nil, err
+	gs = &Groups{}
+	dec := xml.NewDecoder(f)
+	if err = dec.Decode(gs); err != nil {
+		return
 	}
 	// Sort the groups
-	sort.Sort(grp.Groups)
+	sort.Sort(gs.Groups)
 	// Ensure there are no empty Lang= fields
-	for i := range grp.Groups {
-		group := &grp.Groups[i]
-		FixMissingLocalLanguage(&group.LocalName)
+	for i := range gs.Groups {
+		group := &gs.Groups[i]
+		group.LocalName.FixMissingLocalLanguage()
 	}
-	return grp, nil
+	return
 }

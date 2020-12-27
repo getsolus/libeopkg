@@ -14,9 +14,10 @@
 // limitations under the License.
 //
 
-package libeopkg
+package archive
 
 import (
+	"github.com/getsolus/libeopkg/shared"
 	"path/filepath"
 	"testing"
 )
@@ -43,22 +44,22 @@ func TestMetadataSourcePackage(t *testing.T) {
 func TestMetadataSourceDummy(t *testing.T) {
 	metaDatas := []MetaPackage{
 		{
-			Source: Source{
+			Source: shared.Source{
 				Name: "libreoffice",
 			},
 		},
 		{
-			Source: Source{
+			Source: shared.Source{
 				Name: "lib",
 			},
 		},
 		{
-			Source: Source{
+			Source: shared.Source{
 				Name: "alsa-lib",
 			},
 		},
 		{
-			Source: Source{
+			Source: shared.Source{
 				Name: "NANO",
 			},
 		},

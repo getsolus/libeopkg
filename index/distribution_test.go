@@ -14,15 +14,15 @@
 // limitations under the License.
 //
 
-package libeopkg
+package index
 
 import (
 	"testing"
 )
 
 const (
-	notADist     = "testdata/not.xml"
-	distTestFile = "testdata/distribution.xml"
+	notADist     = "../testdata/not.xml"
+	distTestFile = "../testdata/distribution.xml"
 )
 
 func TestDistribution(t *testing.T) {
@@ -36,8 +36,8 @@ func TestDistribution(t *testing.T) {
 	if dist.SourceName != "Solus" {
 		t.Fatalf("Invalid source name %s", dist.SourceName)
 	}
-	if dist.Version != "1" {
-		t.Fatalf("Invalid version %s", dist.Version)
+	if dist.Version != 1 {
+		t.Fatalf("Invalid version %d", dist.Version)
 	}
 	if len(dist.Description) != 23 {
 		t.Fatalf("Invalid number of descriptions: %d", len(dist.Description))
@@ -66,14 +66,12 @@ func TestDistribution(t *testing.T) {
 }
 
 func TestDistributionMissing(t *testing.T) {
-	_, err := NewDistribution(notAFile)
-	if err == nil {
+	if _, err := NewDistribution(notAFile); err == nil {
 		t.Fatalf("Should have failed to open missing file: %s", notAFile)
 	}
 }
 func TestDistributionInvalid(t *testing.T) {
-	_, err := NewDistribution(notADist)
-	if err == nil {
+	if _, err := NewDistribution(notADist); err == nil {
 		t.Fatalf("Should have failed to decode invalid file: %s", notADist)
 	}
 }

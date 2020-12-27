@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-package libeopkg
+package index
 
 import (
 	"io"
@@ -22,8 +22,9 @@ import (
 )
 
 const (
-	componentTestFile = "testdata/components.xml"
-	notXMLFile        = "testdata/not.xml"
+	componentTestFile = "../testdata/components.xml"
+	notAFile          = "../testdata/bob"
+	notXMLFile        = "../testdata/not.xml"
 )
 
 func TestComponents(t *testing.T) {
@@ -34,7 +35,6 @@ func TestComponents(t *testing.T) {
 	if comp == nil {
 		t.Fatalf("Failed to get component")
 	}
-
 	var want *Component
 	for i := range comp.Components {
 		c := &comp.Components[i]
@@ -46,7 +46,6 @@ func TestComponents(t *testing.T) {
 	if want == nil {
 		t.Fatal("Cannot find desired component system.base")
 	}
-
 	if len(want.LocalName) != 23 {
 		t.Fatalf("Invalid number of LocalNames: %d", len(want.LocalName))
 	}
@@ -59,10 +58,10 @@ func TestComponents(t *testing.T) {
 	if want.Group != "system" {
 		t.Fatalf("Wrong group: %s", want.Group)
 	}
-	if want.Maintainer.Name != "Solus Team" {
+	if want.Maintainer.Name != DefaultMaintainerName {
 		t.Fatalf("Wrong maintainer name: %s", want.Maintainer.Name)
 	}
-	if want.Maintainer.Email != "root@solus-project.com" {
+	if want.Maintainer.Email != DefaultMaintainerEmail {
 		t.Fatalf("Wrong maintainer email: %s", want.Maintainer.Email)
 	}
 }

@@ -14,7 +14,7 @@
 // limitations under the License.
 //
 
-package libeopkg
+package archive
 
 import (
 	"os"
@@ -23,10 +23,10 @@ import (
 
 // Our test files, known to produce a valid delta package
 const (
-	deltaOldPkg = "testdata/delta/nano-4.6-117-1-x86_64.eopkg"
-	deltaNewPkg = "testdata/delta/nano-4.7-118-1-x86_64.eopkg"
-	notAFile    = "testdata/bob"
-	notAPkg     = "testdata/not.xml"
+	deltaOldPkg = "../testdata/delta/nano-4.6-117-1-x86_64.eopkg"
+	deltaNewPkg = "../testdata/delta/nano-4.7-118-1-x86_64.eopkg"
+	notAFile    = "../testdata/bob"
+	notAPkg     = "../testdata/not.xml"
 )
 
 func TestBasicDelta(t *testing.T) {

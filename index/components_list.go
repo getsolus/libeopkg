@@ -14,41 +14,13 @@
 // limitations under the License.
 //
 
-package libeopkg
+package index
 
 import (
 	"encoding/xml"
 	"os"
 	"sort"
 )
-
-const (
-	// DefaultMaintainerName is the catch-all name for Solus maintainers
-	DefaultMaintainerName = "Solus Team"
-	// DefaultMaintainerEmail is the catch-all email for Solus maintainers
-	DefaultMaintainerEmail = "root@solus-project.com"
-)
-
-// A Component as seen through the eyes of XML
-type Component struct {
-	// ID of this component, i.e. "system.base"
-	Name string
-	// Translated short name
-	LocalName []LocalisedField
-	// Translated summary
-	Summary []LocalisedField
-	// Translated description
-	Description []LocalisedField
-	// Which group this component belongs to
-	Group string
-	// Maintainer for this component
-	Maintainer struct {
-		// Name of the component maintainer
-		Name string
-		// Contact e-mail address of component maintainer
-		Email string // Contact e-mail address of component maintainer
-	}
-}
 
 // Components is a simple helper wrapper for loading from components.xml files
 type Components struct {
@@ -65,13 +37,13 @@ func (l ComponentList) Len() int {
 }
 
 // Less returns true if the name of the first component is a lower value
-func (l ComponentList) Less(a, b int) bool {
-	return l[a].Name < l[b].Name
+func (l ComponentList) Less(i, j int) bool {
+	return l[i].Name < l[j].Name
 }
 
 // Swap exchanges two components for sorting
-func (l ComponentList) Swap(a, b int) {
-	l[a], l[b] = l[b], l[a]
+func (l ComponentList) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
 }
 
 // NewComponents will load the Components data from the XML file
@@ -93,9 +65,9 @@ func NewComponents(xmlfile string) (cs *Components, err error) {
 	// Ensure there are no empty Lang= fields
 	for i := range cs.Components {
 		comp := &cs.Components[i]
-		FixMissingLocalLanguage(&comp.LocalName)
-		FixMissingLocalLanguage(&comp.Summary)
-		FixMissingLocalLanguage(&comp.Description)
+		comp.LocalName.FixMissingLocalLanguage()
+		comp.Summary.FixMissingLocalLanguage()
+		comp.Description.FixMissingLocalLanguage()
 	}
 	return
 }

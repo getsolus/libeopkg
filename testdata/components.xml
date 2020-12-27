@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <PISI>
 	<Components>
 		<Component>
@@ -75,10 +74,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>system.boot</Name>
 			<LocalName>Boot utilities</LocalName>
@@ -153,10 +151,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>system.utils</Name>
 			<LocalName>System utilities</LocalName>
@@ -231,10 +228,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-	
 		<Component>
 			<Name>system.devel</Name>
 			<LocalName>Base development tools</LocalName>
@@ -309,10 +305,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-				
 		<Component>
 			<Name>xorg.base</Name>
 			<LocalName>X.Org Base Components</LocalName>
@@ -387,10 +382,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>xorg.proto</Name>
 			<LocalName>X.Org Protocol Headers</LocalName>
@@ -465,10 +459,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>xorg.library</Name>
 			<LocalName>X.Org Core Libraries</LocalName>
@@ -543,10 +536,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>xorg.fonts</Name>
 			<LocalName>X.Org Core Fonts</LocalName>
@@ -621,10 +613,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>xorg.apps</Name>
 			<LocalName>X.Org Core Applications</LocalName>
@@ -699,10 +690,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>xorg.display</Name>
 			<LocalName>X.Org Display</LocalName>
@@ -777,10 +767,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>xorg.server</Name>
 			<LocalName>X.Org Server</LocalName>
@@ -855,10 +844,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>xorg.driver</Name>
 			<LocalName>X.Org Drivers</LocalName>
@@ -933,10 +921,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-        
 		<Component>
 			<Name>network.base</Name>
 			<LocalName>Networking Base</LocalName>
@@ -1011,10 +998,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-        
 		<Component>
 			<Name>network.mail</Name>
 			<LocalName>Email clients</LocalName>
@@ -1089,10 +1075,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-        
 		<Component>
 			<Name>network.irc</Name>
 			<LocalName>IRC clients</LocalName>
@@ -1167,10 +1152,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-        
 		<Component>
 			<Name>network.im</Name>
 			<LocalName>Instant messaging</LocalName>
@@ -1245,10 +1229,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>network.news</Name>
 			<LocalName>News and RSS readers</LocalName>
@@ -1323,10 +1306,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>network.remote</Name>
 			<LocalName>Remote management software</LocalName>
@@ -1401,10 +1383,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>network.web</Name>
 			<LocalName>Web applications</LocalName>
@@ -1479,10 +1460,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>network.web.browser</Name>
 			<LocalName>Web browsers</LocalName>
@@ -1557,10 +1537,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>network.util</Name>
 			<LocalName>Networking utilities</LocalName>
@@ -1635,10 +1614,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>network.download</Name>
 			<LocalName>Download managers</LocalName>
@@ -1713,10 +1691,9 @@
 			<Group>network</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-        
 		<Component>
 			<Name>network.clients</Name>
 			<LocalName>Networking CLI Clients</LocalName>
@@ -1791,10 +1768,9 @@
 			<Group>network.clients</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-		
 		<Component>
 			<Name>kernel.image</Name>
 			<LocalName>Kernel Images</LocalName>
@@ -1869,10 +1845,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>kernel.devel</Name>
 			<LocalName>Kernel Development</LocalName>
@@ -1947,10 +1922,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>editor</Name>
 			<LocalName>Text Editors</LocalName>
@@ -2025,10 +1999,9 @@
 			<Group>office</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>office</Name>
 			<LocalName>Office Software</LocalName>
@@ -2103,10 +2076,9 @@
 			<Group>office</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>office.finance</Name>
 			<LocalName>Financial Software</LocalName>
@@ -2181,10 +2153,9 @@
 			<Group>office</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>office.maths</Name>
 			<LocalName>Mathematics-Oriented Software</LocalName>
@@ -2259,10 +2230,9 @@
 			<Group>office</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>office.notes</Name>
 			<LocalName>Note-Taking Software</LocalName>
@@ -2337,10 +2307,9 @@
 			<Group>office</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>office.scientific</Name>
 			<LocalName>Scientific Software</LocalName>
@@ -2415,10 +2384,9 @@
 			<Group>office</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>office.viewers</Name>
 			<LocalName>E-book and PDF Viewing Software</LocalName>
@@ -2493,10 +2461,9 @@
 			<Group>office</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>programming</Name>
 			<LocalName>Programming</LocalName>
@@ -2571,10 +2538,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>programming.devel</Name>
 			<LocalName>Development files</LocalName>
@@ -2649,10 +2615,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>programming.ide</Name>
 			<LocalName>Integrated Developer Environments</LocalName>
@@ -2727,10 +2692,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>programming.tools</Name>
 			<LocalName>Development tools</LocalName>
@@ -2805,10 +2769,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>programming.haskell</Name>
 			<LocalName>Haskell libraries</LocalName>
@@ -2883,10 +2846,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>programming.python</Name>
 			<LocalName>Python modules</LocalName>
@@ -2961,10 +2923,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-        
 		<Component>
 			<Name>programming.perl</Name>
 			<LocalName>Perl modules</LocalName>
@@ -3039,10 +3000,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>programming.java</Name>
 			<LocalName>Java modules and libraries</LocalName>
@@ -3117,10 +3077,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>programming.library</Name>
 			<LocalName>Programming libraries</LocalName>
@@ -3195,10 +3154,9 @@
 			<Group>programming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>database</Name>
 			<LocalName>Database clients and servers</LocalName>
@@ -3273,10 +3231,9 @@
 			<Group>system</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-		
 		<Component>
 			<Name>desktop</Name>
 			<LocalName>Desktop Software</LocalName>
@@ -3351,10 +3308,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.multimedia</Name>
 			<LocalName>General Multimedia Software</LocalName>
@@ -3429,10 +3385,9 @@
 			<Group>multimedia</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>multimedia.graphics</Name>
 			<LocalName>Graphics</LocalName>
@@ -3507,10 +3462,9 @@
 			<Group>multimedia</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-    
 		<Component>
 			<Name>multimedia.codecs</Name>
 			<LocalName>Multimedia Codecs</LocalName>
@@ -3585,10 +3539,9 @@
 			<Group>multimedia</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>multimedia.video</Name>
 			<LocalName>Video Software</LocalName>
@@ -3663,10 +3616,9 @@
 			<Group>multimedia</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>multimedia.audio</Name>
 			<LocalName>Audio Software</LocalName>
@@ -3741,10 +3693,9 @@
 			<Group>multimedia</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-    
 		<Component>
 			<Name>multimedia.library</Name>
 			<LocalName>Multimedia Libraries</LocalName>
@@ -3819,10 +3770,9 @@
 			<Group>multimedia</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>multimedia.gstreamer</Name>
 			<LocalName>GStreamer Runtime</LocalName>
@@ -3896,10 +3846,9 @@
 			<Group>multimedia</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.library</Name>
 			<LocalName>Desktop Libraries</LocalName>
@@ -3974,10 +3923,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-    
 		<Component>
 			<Name>desktop.theme</Name>
 			<LocalName>Desktop Theming</LocalName>
@@ -4052,10 +4000,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-    
 		<Component>
 			<Name>desktop.font</Name>
 			<LocalName>Desktop Fonts</LocalName>
@@ -4130,10 +4077,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.qt</Name>
 			<LocalName>Qt Runtime Libraries</LocalName>
@@ -4208,10 +4154,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.gtk</Name>
 			<LocalName>GTK Runtime Libraries</LocalName>
@@ -4286,10 +4231,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.budgie</Name>
 			<LocalName>Budgie Desktop</LocalName>
@@ -4364,10 +4308,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.gnome</Name>
 			<LocalName>GNOME Desktop</LocalName>
@@ -4442,10 +4385,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-    
 		<Component>
 			<Name>desktop.mate</Name>
 			<LocalName>MATE Desktop</LocalName>
@@ -4520,10 +4462,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.i3</Name>
 			<LocalName>i3 Desktop</LocalName>
@@ -4598,10 +4539,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.gnome.core</Name>
 			<LocalName>GNOME Desktop - Core System</LocalName>
@@ -4676,10 +4616,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.gnome.doc</Name>
 			<LocalName>GNOME Documentation Tools</LocalName>
@@ -4754,10 +4693,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.kde</Name>
 			<LocalName>KDE Desktop</LocalName>
@@ -4799,10 +4737,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.kde.core</Name>
 			<LocalName>KDE Desktop - Core System</LocalName>
@@ -4844,10 +4781,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>desktop.core</Name>
 			<LocalName>Desktop Core Components</LocalName>
@@ -4922,10 +4858,9 @@
 			<Group>desktop</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>security</Name>
 			<LocalName>Security applications</LocalName>
@@ -5000,10 +4935,9 @@
 			<Group>security</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>security.crypto</Name>
 			<LocalName>Cryptographic utilities</LocalName>
@@ -5078,10 +5012,9 @@
 			<Group>security</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>security.library</Name>
 			<LocalName>Security-oriented libraries</LocalName>
@@ -5156,10 +5089,9 @@
 			<Group>security</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games</Name>
 			<LocalName>Main games collection</LocalName>
@@ -5234,10 +5166,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.action</Name>
 			<LocalName>Action Games</LocalName>
@@ -5312,10 +5243,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.arcade</Name>
 			<LocalName>Arcade Games</LocalName>
@@ -5390,10 +5320,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.card</Name>
 			<LocalName>Card Games</LocalName>
@@ -5468,10 +5397,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.emulator</Name>
 			<LocalName>Console Emulators</LocalName>
@@ -5546,10 +5474,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.mmo</Name>
 			<LocalName>Massive Multiplayer Online Games</LocalName>
@@ -5624,10 +5551,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.platformer</Name>
 			<LocalName>Platformer Games</LocalName>
@@ -5702,10 +5628,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.puzzle</Name>
 			<LocalName>Puzzle Games</LocalName>
@@ -5780,10 +5705,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.rpg</Name>
 			<LocalName>Role-playing Games</LocalName>
@@ -5858,10 +5782,9 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>
-
 		<Component>
 			<Name>games.strategy</Name>
 			<LocalName>Strategy Games</LocalName>
@@ -5936,7 +5859,7 @@
 			<Group>gaming</Group>
 			<Maintainer>
 				<Name>Solus Team</Name>
-				<Email>root@solus-project.com</Email>
+				<Email>copyright@getsol.us</Email>
 			</Maintainer>
 		</Component>	
 	</Components>

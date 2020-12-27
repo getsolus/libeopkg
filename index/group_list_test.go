@@ -14,15 +14,15 @@
 // limitations under the License.
 //
 
-package libeopkg
+package index
 
 import (
 	"testing"
 )
 
 const (
-	notAGroup     = "testdata/not.xml"
-	groupTestFile = "testdata/groups.xml"
+	notAGroup     = "../testdata/not.xml"
+	groupTestFile = "../testdata/groups.xml"
 )
 
 func TestGroups(t *testing.T) {
@@ -33,7 +33,6 @@ func TestGroups(t *testing.T) {
 	if grp == nil {
 		t.Fatalf("Failed to get group")
 	}
-
 	var want *Group
 	for i := range grp.Groups {
 		c := &grp.Groups[i]
@@ -42,15 +41,12 @@ func TestGroups(t *testing.T) {
 			break
 		}
 	}
-
 	if want == nil {
 		t.Fatal("Cannot find desired group multimedia")
 	}
-
 	if len(want.LocalName) != 23 {
 		t.Fatalf("Invalid number of LocalNames: %d", len(want.LocalName))
 	}
-
 	if want.LocalName[0].Lang != "en" {
 		t.Fatalf("First element should be en by default: %s", want.LocalName[0].Lang)
 	}
@@ -63,15 +59,13 @@ func TestGroups(t *testing.T) {
 }
 
 func TestGroupsMissing(t *testing.T) {
-	_, err := NewGroups(notAFile)
-	if err == nil {
+	if _, err := NewGroups(notAFile); err == nil {
 		t.Fatalf("Should have failed to load missing file: %s", notAFile)
 	}
 }
 
 func TestGroupsInvalid(t *testing.T) {
-	_, err := NewGroups(notAGroup)
-	if err == nil {
+	if _, err := NewGroups(notAGroup); err == nil {
 		t.Fatalf("Should have failed to load invalid file: %s", notAGroup)
 	}
 }

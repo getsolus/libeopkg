@@ -14,16 +14,7 @@
 // limitations under the License.
 //
 
-// Package libeopkg provides Go-native access to `.eopkg` files, allowing
-// ferryd to read and manipulate them without having a host-side eopkg
-// tool.
-//
-// It should also be noted that `eopkg` is implemented in Python, so calling
-// out to the host-side tool just isn't acceptable for the performance we
-// require.
-// In time, `sol` will replace eopkg and it is very likely that we'll base
-// the new `libsol` component on the C library using cgo.
-package libeopkg
+package shared
 
 // LocalisedField is used in various parts of the eopkg metadata to provide
 // a field value with an xml:lang attribute describing the language
@@ -32,9 +23,12 @@ type LocalisedField struct {
 	Lang  string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 }
 
+// LocalisedFields is a list of more than one translation of the same field
+type LocalisedFields []LocalisedField
+
 // FixMissingLocalLanguage should be used on a set of LocalisedField to restore
 // the missing "en" that is required in the very first field set.
-func FixMissingLocalLanguage(fields *[]LocalisedField) {
+func (fields *LocalisedFields) FixMissingLocalLanguage() {
 	if fields == nil {
 		return
 	}
