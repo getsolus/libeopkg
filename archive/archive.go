@@ -86,11 +86,11 @@ func (a *Archive) Close() error {
 	if a == nil {
 		return nil
 	}
-    if a.zipFile != nil {
-        err := a.zipFile.Close()
-        a.zipFile = nil
-        return err
-    }
+	if a.zipFile != nil {
+		err := a.zipFile.Close()
+		a.zipFile = nil
+		return err
+	}
 	return nil
 }
 

@@ -17,7 +17,6 @@
 package archive
 
 import (
-	"os"
 	"os/exec"
 )
 

@@ -84,9 +84,9 @@ func (p *Package) GetPathComponent() string {
 	nom := strings.ToLower(p.Source.Name)
 	letter := nom[0:1]
 	if strings.HasPrefix(nom, "lib") && len(nom) > 3 {
-		return  filepath.Join(nom[0:4], nom)
+		return filepath.Join(nom[0:4], nom)
 	}
-    return filepath.Join(letter, nom)
+	return filepath.Join(letter, nom)
 }
 
 // DeltaName returns the filename (without extension) of a delta package

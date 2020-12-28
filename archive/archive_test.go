@@ -88,7 +88,7 @@ func TestArchiveFiles(t *testing.T) {
 	if wanted == nil {
 		t.Fatalf("Failed to find nano executable")
 	}
-	if wanted.FileMode().String() != "-rwxr-xr-x" {
-		t.Fatalf("Invalid file mode on nano: %s", wanted.FileMode().String())
+	if wanted.Mode.String() != "-rwxr-xr-x" {
+		t.Fatalf("Invalid file mode on nano: %s", wanted.Mode.String())
 	}
 }

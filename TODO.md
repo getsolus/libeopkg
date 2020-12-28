@@ -4,7 +4,7 @@
 
 ### General
 
- - [ ] Refactor modePrivate in File so use custom Marshal/Unmarshal instead of private field
+ - [x] Refactor modePrivate in File so use custom Marshal/Unmarshal instead of private field
  - [x] New Diff for Files when generating Deltas
 
 ### Required for ferryd

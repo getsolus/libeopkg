@@ -39,14 +39,12 @@ import (
 type File struct {
 	Path      string
 	Type      shared.FileType
-	Size      int64  `xml:",omitempty"`
-	UID       int    `xml:"UID,omitempty"`
-	GID       int    `xml:"GID,omitempty"`
-	Mode      string `xml:",omitempty"`
-	Hash      string `xml:",omitempty"`
-	Permanent string `xml:",omitempty"`
-
-	modePrivate os.FileMode // We populate this during files.xml read
+	Size      int64    `xml:",omitempty"`
+	UID       int      `xml:"UID,omitempty"`
+	GID       int      `xml:"GID,omitempty"`
+	Mode      FileMode `xml:",omitempty"`
+	Hash      string   `xml:",omitempty"`
+	Permanent string   `xml:",omitempty"`
 }
 
 // Equal checks if one file is identical to another
@@ -54,6 +52,11 @@ func (f *File) Equal(other *File) bool {
 	return f.Path == other.Path && f.Type == other.Type && f.Size == other.Size &&
 		f.UID == other.UID && other.GID == other.GID && f.Mode == other.Mode &&
 		f.Hash == other.Hash && f.Permanent == other.Permanent
+}
+
+// FileMode will return an os.FileMode version of our string encoded "Mode" member
+func (f *File) FileMode() os.FileMode {
+	return os.FileMode(f.Mode)
 }
 
 // ReadFiles will read the `files.xml` file within the archive and
@@ -76,31 +79,7 @@ func (p *Archive) ReadFiles() error {
 	// Decode its contents
 	p.Files = &Files{}
 	dec := xml.NewDecoder(f)
-	if err = dec.Decode(p.Files); err != nil {
-		return err
-	}
-	// Convert file modes from strings to ints
-	for _, f := range p.Files.File {
-		if err := f.ParseFileMode(); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-// ParseFileMode converts a string filemode to a binary one
-func (f *File) ParseFileMode() error {
-	i, err := strconv.ParseUint(f.Mode, 8, 32)
-	if err != nil {
-		return err
-	}
-	f.modePrivate = os.FileMode(i)
-	return nil
-}
-
-// FileMode will return an os.FileMode version of our string encoded "Mode" member
-func (f *File) FileMode() os.FileMode {
-	return f.modePrivate
+	return dec.Decode(p.Files)
 }
 
 // Files is the idiomatic representation of the XML <Files> node with one or
@@ -121,7 +100,7 @@ func (fs Files) HasFile(path string) bool {
 
 // Diff creates a new Files from all of the modifications between "other" and this Files
 func (fs *Files) Diff(other *Files) (modified, removed *Files) {
-    modified, removed = &Files{}, &Files{}
+	modified, removed = &Files{}, &Files{}
 	// Check for modified or removed files
 	for _, curr := range fs.File {
 		found := false
@@ -153,4 +132,35 @@ func (fs *Files) Diff(other *Files) (modified, removed *Files) {
 		}
 	}
 	return
+}
+
+// FileMode is a hexdecimal excoded FileMode
+type FileMode os.FileMode
+
+// UnmarshalXML allows reading a FileMode as Hex
+func (fm FileMode) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
+	raw := strconv.FormatUint(uint64(fm), 8)
+	if len(raw) == 3 || len(raw) == 4 {
+		raw = "0" + raw
+	}
+	return e.EncodeElement(raw, start)
+}
+
+// UnmarshalXML allows reading a FileMode as Hex
+func (fm *FileMode) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
+	var err error
+	var raw string
+	if err = d.DecodeElement(&raw, &start); err != nil {
+		return err
+	}
+	var i uint64
+	if i, err = strconv.ParseUint(raw, 8, 16); err != nil {
+		return err
+	}
+	*fm = FileMode(i)
+	return nil
+}
+
+func (fm FileMode) String() string {
+	return os.FileMode(fm).String()
 }

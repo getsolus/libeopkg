@@ -126,7 +126,7 @@ func (dp *DeltaProducer) produceTarball() (filename string, err error) {
 	outF.Close()
 	// Compress the tarball
 	filename = fmt.Sprintf("%s.xz", installTar)
-    println(filename)
+	println(filename)
 	err = XzFile(installTar, false)
 	return
 }
@@ -253,7 +253,7 @@ func (dp *DeltaProducer) Create() (filename string, err error) {
 		return
 	}
 	// Open the Zip file
-	filename = filepath.Join(dp.workDir, dp.prefix + ".delta.eopkg")
+	filename = filepath.Join(dp.workDir, dp.prefix+".delta.eopkg")
 	dst, err := os.Create(filename)
 	if err != nil {
 		dp.cleanup(xzPath, filename)
