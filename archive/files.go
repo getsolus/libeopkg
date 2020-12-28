@@ -17,6 +17,7 @@
 package archive
 
 import (
+	"encoding/xml"
 	"github.com/getsolus/libeopkg/shared"
 	"os"
 	"strconv"
@@ -48,6 +49,45 @@ type File struct {
 	modePrivate os.FileMode // We populate this during files.xml read
 }
 
+// Equal checks if one file is identical to another
+func (f *File) Equal(other *File) bool {
+	return f.Path == other.Path && f.Type == other.Type && f.Size == other.Size &&
+		f.UID == other.UID && other.GID == other.GID && f.Mode == other.Mode &&
+		f.Hash == other.Hash && f.Permanent == other.Permanent
+}
+
+// ReadFiles will read the `files.xml` file within the archive and
+// deserialize it into something accessible within the .eopkg container.
+func (p *Archive) ReadFiles() error {
+	// Already read Files
+	if p.Files != nil {
+		return nil
+	}
+	// Open the files list
+	files := p.FindFile("files.xml")
+	if files == nil {
+		return shared.ErrEopkgCorrupted
+	}
+	f, err := files.Open()
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+	// Decode its contents
+	p.Files = &Files{}
+	dec := xml.NewDecoder(f)
+	if err = dec.Decode(p.Files); err != nil {
+		return err
+	}
+	// Convert file modes from strings to ints
+	for _, f := range p.Files.File {
+		if err := f.ParseFileMode(); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 // ParseFileMode converts a string filemode to a binary one
 func (f *File) ParseFileMode() error {
 	i, err := strconv.ParseUint(f.Mode, 8, 32)
@@ -67,4 +107,50 @@ func (f *File) FileMode() os.FileMode {
 // more <File> children
 type Files struct {
 	File []*File
+}
+
+// HasFile checks if the specified path is listed
+func (fs Files) HasFile(path string) bool {
+	for _, f := range fs.File {
+		if f.Path == path {
+			return true
+		}
+	}
+	return false
+}
+
+// Diff creates a new Files from all of the modifications between "other" and this Files
+func (fs *Files) Diff(other *Files) (modified, removed *Files) {
+    modified, removed = &Files{}, &Files{}
+	// Check for modified or removed files
+	for _, curr := range fs.File {
+		found := false
+		for _, next := range other.File {
+			if curr.Path != next.Path {
+				continue
+			}
+			if !curr.Equal(next) {
+				modified.File = append(modified.File, next)
+				found = true
+				break
+			}
+		}
+		if !found {
+			removed.File = append(removed.File, curr)
+		}
+	}
+	// Check for new files
+	for _, next := range other.File {
+		found := false
+		for _, curr := range fs.File {
+			if next.Equal(curr) {
+				found = true
+				break
+			}
+		}
+		if !found {
+			modified.File = append(modified.File, next)
+		}
+	}
+	return
 }

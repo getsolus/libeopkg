@@ -26,8 +26,8 @@ const (
 	eopkgTestFile = "../testdata/nano-4.7-118-1-x86_64.eopkg"
 )
 
-// TestPackageOpen will validate simple open of package files
-func TestPackageOpen(t *testing.T) {
+// TestArchiveOpen will validate simple open of package files
+func TestArchiveOpen(t *testing.T) {
 	if _, err := Open("NoSuchFile.txt"); err == nil {
 		t.Fatal("Mysteriously opened a file that doesn't exist!")
 	}
@@ -39,7 +39,6 @@ func TestPackageOpen(t *testing.T) {
 		t.Fatalf("Error opening valid .eopkg file: %v", err)
 	}
 	defer pkg.Close()
-
 	meta := pkg.FindFile("metadata.xml")
 	if meta == nil {
 		t.Fatal("Good archive is missing metadata.xml")
@@ -56,7 +55,7 @@ func TestPackageOpen(t *testing.T) {
 	}
 }
 
-func TestPackageMeta(t *testing.T) {
+func TestArchiveMeta(t *testing.T) {
 	pkg, err := Open(eopkgTestFile)
 	if err != nil {
 		t.Fatalf("Error opening valid .eopkg file: %v", err)
@@ -70,7 +69,7 @@ func TestPackageMeta(t *testing.T) {
 	fmt.Fprintf(os.Stderr, "Summary: %s\n", metaPkg.Summary)
 }
 
-func TestPackageFiles(t *testing.T) {
+func TestArchiveFiles(t *testing.T) {
 	pkg, err := Open(eopkgTestFile)
 	if err != nil {
 		t.Fatalf("Error opening valid .eopkg file: %v", err)
@@ -86,11 +85,9 @@ func TestPackageFiles(t *testing.T) {
 			break
 		}
 	}
-
 	if wanted == nil {
 		t.Fatalf("Failed to find nano executable")
 	}
-
 	if wanted.FileMode().String() != "-rwxr-xr-x" {
 		t.Fatalf("Invalid file mode on nano: %s", wanted.FileMode().String())
 	}

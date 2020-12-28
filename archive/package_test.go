@@ -42,7 +42,7 @@ func TestMetadataSourcePackage(t *testing.T) {
 // Test a variety of source names and ensure we get the right component
 // each time for the subpath we expect to see in the repository
 func TestMetadataSourceDummy(t *testing.T) {
-	metaDatas := []MetaPackage{
+	metaDatas := []Package{
 		{
 			Source: shared.Source{
 				Name: "libreoffice",

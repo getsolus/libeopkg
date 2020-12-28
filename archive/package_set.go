@@ -17,7 +17,7 @@
 package archive
 
 // PackageSet provides sorting capabilities for a slice of packages
-type PackageSet []*MetaPackage
+type PackageSet []*Package
 
 // Len returns the size of the PackageSet for sorting
 func (p PackageSet) Len() int {

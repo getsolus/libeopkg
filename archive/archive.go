@@ -18,16 +18,14 @@ package archive
 
 import (
 	"archive/zip"
-	"encoding/xml"
 	"github.com/getsolus/libeopkg/shared"
 	"io"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 //
-// A Package is used for accessing a `.eopkg` archive, the current format used
+// An Archive is used for accessing a `.eopkg` archive, the current format used
 // within Solus for software packages.
 //
 // An .eopkg archive is actually a ZIP archive. Internally it has the following
@@ -43,7 +41,7 @@ import (
 // This is much faster than having to call out to the host side tool, which
 // is presently written in Python.
 //
-type Package struct {
+type Archive struct {
 	// Path to this .eopkg file
 	Path string
 	// Basename of the package, unique.
@@ -59,24 +57,41 @@ type Package struct {
 // Open will attempt to open the given .eopkg file.
 // This must be a valid .eopkg file and this stage will assert that it is
 // indeed a real archive.
-func Open(path string) (*Package, error) {
+func Open(path string) (a *Archive, err error) {
 	// Create package object
-	ret := &Package{
+	a = &Archive{
 		Path: path,
 		ID:   filepath.Base(path),
 	}
 	// Open package file
 	zipFile, err := zip.OpenReader(path)
 	if err != nil {
-		return nil, err
+		return
 	}
-	ret.zipFile = zipFile
-	return ret, nil
+	a.zipFile = zipFile
+	return
+}
+
+// OpenAll will Open an Archive and ReadAll of its metadata
+func OpenAll(path string) (a *Archive, err error) {
+	if a, err = Open(path); err != nil {
+		return
+	}
+	err = a.ReadAll()
+	return
 }
 
 // Close a previously opened .eopkg file
-func (p *Package) Close() error {
-	return p.zipFile.Close()
+func (a *Archive) Close() error {
+	if a == nil {
+		return nil
+	}
+    if a.zipFile != nil {
+        err := a.zipFile.Close()
+        a.zipFile = nil
+        return err
+    }
+	return nil
 }
 
 // FindFile will search for the given name in the .zip's
@@ -88,9 +103,9 @@ func (p *Package) Close() error {
 // In the event of the file requested not being found,
 // we return nil. The caller should then bail and indicate
 // that the eopkg is corrupted.
-func (p *Package) FindFile(path string) *zip.File {
+func (a *Archive) FindFile(path string) *zip.File {
 	// Iterate over all files
-	for _, f := range p.zipFile.File {
+	for _, f := range a.zipFile.File {
 		// Check for match
 		if path == f.Name {
 			return f
@@ -99,121 +114,47 @@ func (p *Package) FindFile(path string) *zip.File {
 	return nil
 }
 
-// ReadMetadata will read the `metadata.xml` file within the archive and
-// deserialize it into something accessible within the .eopkg container.
-func (p *Package) ReadMetadata() error {
-	// Already read metadata
-	if p.Meta != nil {
-		return nil
-	}
-	// Open the metadata file
-	metaFile := p.FindFile("metadata.xml")
-	if metaFile == nil {
-		return shared.ErrEopkgCorrupted
-	}
-	fi, err := metaFile.Open()
-	if err != nil {
-		return err
-	}
-	defer fi.Close()
-	// Decode its contents
-	metadata := &Metadata{}
-	dec := xml.NewDecoder(fi)
-	if err = dec.Decode(metadata); err != nil {
-		return err
-	}
-	p.Meta = metadata
-	// Remove extraneous spaces and fix missing localised fields
-	for i := range p.Meta.Package.Summary {
-		sum := &p.Meta.Package.Summary[i]
-		sum.Value = strings.TrimSpace(sum.Value)
-	}
-	p.Meta.Package.Summary.FixMissingLocalLanguage()
-	for i := range p.Meta.Package.Description {
-		desc := &p.Meta.Package.Description[i]
-		desc.Value = strings.TrimSpace(desc.Value)
-	}
-	p.Meta.Package.Description.FixMissingLocalLanguage()
-	return nil
-}
-
-// ReadFiles will read the `files.xml` file within the archive and
-// deserialize it into something accessible within the .eopkg container.
-func (p *Package) ReadFiles() error {
-	// Already read Files
-	if p.Files != nil {
-		return nil
-	}
-	// Open the files list
-	files := p.FindFile("files.xml")
-	if files == nil {
-		return shared.ErrEopkgCorrupted
-	}
-	fi, err := files.Open()
-	if err != nil {
-		return err
-	}
-	defer fi.Close()
-	// Decode its contents
-	ret := &Files{}
-	dec := xml.NewDecoder(fi)
-	if err = dec.Decode(ret); err != nil {
-		return err
-	}
-	// Convert file modes from strings to ints
-	for _, f := range ret.File {
-		if err := f.ParseFileMode(); err != nil {
-			return err
-		}
-	}
-	p.Files = ret
-	return nil
-}
-
 // ReadAll will read both the metadata + files xml files
-func (p *Package) ReadAll() error {
-	if err := p.ReadMetadata(); err != nil {
+func (a *Archive) ReadAll() error {
+	if err := a.ReadMetadata(); err != nil {
 		return err
 	}
-	return p.ReadFiles()
+	return a.ReadFiles()
 }
 
-// ExtractTarball will fully extract install.tar.xz to the destination
-// direction + install.tar suffix
-func (p *Package) ExtractTarball(directory string) error {
+// ExtractTarball will fully extract install.tar.xz to the destination direction + install.tar suffix
+func (a *Archive) ExtractTarball(directory string) error {
 	// Open tarball
-	xzName := filepath.Join(directory, "install.tar.xz")
-	tarball := p.FindFile("install.tar.xz")
+	tarball := a.FindFile("install.tar.xz")
 	if tarball == nil {
 		return shared.ErrEopkgCorrupted
 	}
-
-	fi, err := tarball.Open()
+	f, err := tarball.Open()
 	if err != nil {
 		return err
 	}
-	defer fi.Close()
+	defer f.Close()
 	// Create destination tarball
+	xzName := filepath.Join(directory, "install.tar.xz")
 	outF, err := os.Create(xzName)
 	if err != nil {
 		return err
 	}
 	defer outF.Close()
 	// Copy the entire tarball
-	if _, err = io.Copy(outF, fi); err != nil {
+	if _, err = io.Copy(outF, f); err != nil {
 		return err
 	}
 	// Uncompress the tarball
 	return UnxzFile(xzName, false)
 }
 
-// filesToMap is a helper that will let us uniquely index hash to file-set
-func (p *Package) filesToMap() (ret map[string][]*File) {
-	ret = make(map[string][]*File)
-	// For each file in files
-	for _, f := range p.Files.File {
-		// Append it to a list of files with the same hash
-		ret[f.Hash] = append(ret[f.Hash], f)
-	}
-	return ret
+// IsDeltaPossible checks is a delta can be made from the two provided packages
+func (a *Archive) IsDeltaPossible(newRelease *Archive) bool {
+	return a.Meta.Package.IsDeltaPossible(newRelease.Meta.Package)
+}
+
+// Diff gets a list of files in "other" that have been modified or don't exist in this archive
+func (a *Archive) Diff(other *Archive) (*Files, *Files) {
+	return a.Files.Diff(other.Files)
 }

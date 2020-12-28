@@ -17,37 +17,9 @@
 package archive
 
 import (
-	"fmt"
 	"os"
 	"os/exec"
 )
-
-// DISCLAIMER: This stuff is just supporting the existing eopkg stuff.
-// We know it's not ideal. When sol comes we'll have a much improved
-// package format with a hash-indexed self deduplicating archive to
-// mitigate delta issues, reduce sizes, and ensure verification at all stages
-
-// ComputeDeltaName will determine the target name for the delta eopkg
-func ComputeDeltaName(oldPackage, newPackage *MetaPackage) string {
-	return fmt.Sprintf("%s-%d-%d-%s-%s.delta.eopkg",
-		newPackage.Name,
-		oldPackage.GetRelease(),
-		newPackage.GetRelease(),
-		newPackage.DistributionRelease,
-		newPackage.Architecture)
-}
-
-// IsDeltaPossible will compare the two input packages and determine if it
-// is possible for a delta to be considered. Note that we do not compare the
-// distribution _name_ because Solus already had to do a rename once, and that
-// broke delta updates. Let's not do that again. eopkg should in reality determine
-// delta applicability based on repo origin + upgrade path, not names
-func IsDeltaPossible(oldPackage, newPackage *MetaPackage) bool {
-	return oldPackage.GetRelease() < newPackage.GetRelease() &&
-		oldPackage.Name == newPackage.Name &&
-		oldPackage.DistributionRelease == newPackage.DistributionRelease &&
-		oldPackage.Architecture == newPackage.Architecture
-}
 
 // XzFile is a simple wrapper around the xz utility to compress the input
 // file. This will be performed in place and leave a ".xz" suffixed file in
@@ -64,7 +36,6 @@ func XzFile(inputPath string, keepOriginal bool) error {
 		cmd = append(cmd, "-k")
 	}
 	c := exec.Command(cmd[0], cmd[1:]...)
-	c.Stderr = os.Stderr
 	return c.Run()
 }
 
@@ -80,6 +51,5 @@ func UnxzFile(inputPath string, keepOriginal bool) error {
 		cmd = append(cmd, "-k")
 	}
 	c := exec.Command(cmd[0], cmd[1:]...)
-	c.Stderr = os.Stderr
 	return c.Run()
 }

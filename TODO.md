@@ -5,17 +5,16 @@
 ### General
 
  - [ ] Refactor modePrivate in File so use custom Marshal/Unmarshal instead of private field
- - [ ] Checksum archive file
-
+ - [x] New Diff for Files when generating Deltas
 
 ### Required for ferryd
 
- - [ ] Extract and compress: `files.xml` and `metadata.xml`
- - [ ] Generate Deltas
-    - [ ] Calculate difference between two packages
-    - [ ] Generate new `files.xml` from diff
-    - [ ] Copy existing `metadata.xml` from new package
-    - [ ] Build a package from differences
+ - [x] Extract `files.xml` and `metadata.xml`
+ - [x] Generate Deltas
+    - [x] Calculate difference between two packages
+    - [x] Copy existing `files.xml` from new package
+    - [x] Copy existing `metadata.xml` from new package
+    - [x] Build a package from differences
  - [ ] Write, compress, and sha256sum Index
 
 ### Required for ypkg3

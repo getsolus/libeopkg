@@ -16,15 +16,16 @@
 
 package shared
 
+import (
+	"strings"
+)
+
 // LocalisedField is used in various parts of the eopkg metadata to provide
 // a field value with an xml:lang attribute describing the language
 type LocalisedField struct {
 	Value string `xml:",cdata"`
 	Lang  string `xml:"http://www.w3.org/XML/1998/namespace lang,attr,omitempty"`
 }
-
-// LocalisedFields is a list of more than one translation of the same field
-type LocalisedFields []LocalisedField
 
 // FixMissingLocalLanguage should be used on a set of LocalisedField to restore
 // the missing "en" that is required in the very first field set.
@@ -36,4 +37,15 @@ func (fields *LocalisedFields) FixMissingLocalLanguage() {
 	if field.Lang == "" {
 		field.Lang = "en"
 	}
+}
+
+// LocalisedFields is a list of more than one translation of the same field
+type LocalisedFields []LocalisedField
+
+// Clean removes unnecessary whitespace from each field and then fixes any missing language attributes
+func (fields *LocalisedFields) Clean() {
+	for i, field := range *fields {
+		(*fields)[i].Value = strings.TrimSpace(field.Value)
+	}
+	fields.FixMissingLocalLanguage()
 }
