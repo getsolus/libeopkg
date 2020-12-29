@@ -15,7 +15,7 @@
     - [x] Copy existing `files.xml` from new package
     - [x] Copy existing `metadata.xml` from new package
     - [x] Build a package from differences
- - [ ] Write, compress, and sha256sum Index
+ - [x] Write, compress, and sha1sum Index
 
 ### Required for ypkg3
 

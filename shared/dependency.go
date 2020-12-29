@@ -19,7 +19,7 @@ package shared
 // A Dependency has various attributes which help determine what needs to
 // be installed when updating or installing the package.
 type Dependency struct {
-	Name string `xml:",chardata"`
+	Name string `xml:",innerxml"`
 	// Release based dependencies
 	ReleaseFrom int `xml:"releaseFrom,attr,omitempty"`
 	ReleaseTo   int `xml:"releaseTo,attr,omitempty"`

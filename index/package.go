@@ -25,11 +25,14 @@ type Package struct {
 	Name                string
 	Summary             shared.LocalisedField
 	Description         shared.LocalisedField
-	PartOf              string
-	Licenses            []string `xml:"License>"`
-	RuntimeDependencies []shared.Dependency
-	Provides            shared.Provides
-	History             []shared.Update
+	IsA                 string              `xml:",omitempty"`
+	PartOf              string              `xml:",omitempty"`
+	Licenses            []string            `xml:"License"`
+	RuntimeDependencies []shared.Dependency `xml:",omitempty"`
+	Replaces            *[]string           `xml:"Replaces>Package,omitempty"`
+	Conflicts           *[]string           `xml:"Conflicts>Package,omitempty"`
+	Provides            *shared.Provides    `xml:",omitempty"`
+	History             []shared.Update     `xml:"History>Update"`
 	BuildHost           string
 	Distribution        string
 	DistributionRelease int
@@ -38,7 +41,7 @@ type Package struct {
 	PackageSize         int
 	PackageHash         string
 	PackageURI          string
-	DeltaPackages       []Delta
+	DeltaPackages       *[]Delta `xml:"DeltaPackages>Delta,omitempty"`
 	PackageFormat       string
 	Source              shared.Source
 }

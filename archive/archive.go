@@ -146,7 +146,7 @@ func (a *Archive) ExtractTarball(directory string) error {
 		return err
 	}
 	// Uncompress the tarball
-	return UnxzFile(xzName, false)
+	return shared.UnxzFile(xzName, false)
 }
 
 // IsDeltaPossible checks is a delta can be made from the two provided packages

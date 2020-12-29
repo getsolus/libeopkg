@@ -18,7 +18,6 @@ package index
 
 import (
 	"encoding/xml"
-	"github.com/getsolus/libeopkg/shared"
 	"os"
 )
 
@@ -27,7 +26,7 @@ type Distribution struct {
 	// Name of source to match source repos
 	SourceName string
 	// Translated description
-	Description shared.LocalisedFields
+	Description Descriptions
 	// Published version number for compatibility
 	Version int
 	// Type of repository (should always be main, really. Just descriptive)
@@ -68,4 +67,13 @@ func NewDistribution(xmlfile string) (dist *Distribution, err error) {
 // was marked obsolete and should be hidden from the index
 func (d *Distribution) IsObsolete(id string) bool {
 	return d.obsmap[id]
+}
+
+// Descriptions is a list of Descriptions of a repository
+type Descriptions []Description
+
+// Description is a localised description of a repository
+type Description struct {
+	Lang  string `xml:"lang,attr,omitempty"`
+	Value string `xml:",innerxml"`
 }

@@ -17,7 +17,13 @@
 package index
 
 import (
+	"crypto/sha1"
 	"encoding/xml"
+	"fmt"
+	"github.com/getsolus/libeopkg/shared"
+	"io"
+	"os"
+	"path/filepath"
 )
 
 // Index is downloaded on a per-reprosity basis to provide information about the repository's:
@@ -26,7 +32,64 @@ import (
 type Index struct {
 	XMLName      xml.Name `xml:"PISI"`
 	Distribution Distribution
-	Packages     []Package `xml:"Package>"`
-	Components
-	Groups
+	Packages     []Package   `xml:"Package"`
+	Components   []Component `xml:"Component"`
+	Groups       []Group     `xml:"Group"`
+}
+
+// Load reads the index from a file
+func Load(path string) (i *Index, err error) {
+	i = &Index{}
+	xmlFile, err := os.Open(path)
+	if err != nil {
+		return
+	}
+	defer xmlFile.Close()
+	dec := xml.NewDecoder(xmlFile)
+	err = dec.Decode(i)
+	return
+}
+
+// hashFile creates a sha1sum for a given file
+func hashFile(path string) error {
+	iFile, err := os.Open(path)
+	if err != nil {
+		return err
+	}
+	defer iFile.Close()
+	h := sha1.New()
+	_, err = io.Copy(h, iFile)
+	if err != nil {
+		return err
+	}
+	oFile, err := os.Create(path + ".sha1sum")
+	if err != nil {
+		return err
+	}
+	defer oFile.Close()
+	fmt.Fprintf(oFile, "%x", h.Sum(nil))
+	return nil
+}
+
+// Save writes the index out to a file, compresses it, and then generates hash files for both files
+func (i *Index) Save(path string) error {
+	indexFile := filepath.Join(path, "eopkg-index.xml")
+	xmlFile, err := os.Create(indexFile)
+	if err != nil {
+		return err
+	}
+	enc := xml.NewEncoder(xmlFile)
+	enc.Indent("    ", "    ")
+	if err = enc.Encode(i); err != nil {
+		xmlFile.Close()
+		return err
+	}
+	xmlFile.Close()
+	if err = shared.XzFile(indexFile, true); err != nil {
+		return err
+	}
+	if err = hashFile(indexFile); err != nil {
+		return err
+	}
+	return hashFile(indexFile + ".xz")
 }

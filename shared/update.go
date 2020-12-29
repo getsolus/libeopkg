@@ -26,5 +26,8 @@ type Update struct {
 	Comment struct {
 		Value string `xml:",cdata"`
 	}
-	Packager
+	Name struct {
+		Value string `xml:",cdata"`
+	}
+	Email string
 }

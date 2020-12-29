@@ -21,6 +21,7 @@ import (
 	"archive/zip"
 	"errors"
 	"fmt"
+	"github.com/getsolus/libeopkg/shared"
 	"io"
 	"os"
 	"path/filepath"
@@ -127,7 +128,7 @@ func (dp *DeltaProducer) produceTarball() (filename string, err error) {
 	// Compress the tarball
 	filename = fmt.Sprintf("%s.xz", installTar)
 	println(filename)
-	err = XzFile(installTar, false)
+	err = shared.XzFile(installTar, false)
 	return
 }
 

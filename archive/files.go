@@ -137,7 +137,7 @@ func (fs *Files) Diff(other *Files) (modified, removed *Files) {
 // FileMode is a hexdecimal excoded FileMode
 type FileMode os.FileMode
 
-// UnmarshalXML allows reading a FileMode as Hex
+// MarshalXML allows writing a FileMode as Hex
 func (fm FileMode) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	raw := strconv.FormatUint(uint64(fm), 8)
 	if len(raw) == 3 || len(raw) == 4 {
