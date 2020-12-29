@@ -55,6 +55,7 @@ func TestBasicDelta(t *testing.T) {
 	if pkg.Meta.Package.GetRelease() != 118 {
 		t.Fatalf("Invalid release number in delta: %d", pkg.Meta.Package.GetRelease())
 	}
+	os.RemoveAll("TESTING")
 }
 
 func TestBasicDeltaOldMissing(t *testing.T) {

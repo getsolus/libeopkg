@@ -17,10 +17,16 @@
 package archive
 
 import (
+	"bytes"
+	"crypto/sha1"
 	"encoding/xml"
+	"fmt"
 	"github.com/getsolus/libeopkg/shared"
+	"io"
 	"os"
+	"path/filepath"
 	"strconv"
+	"syscall"
 )
 
 // File is the idoimatic representation of the XML <File> node
@@ -57,6 +63,55 @@ func (f *File) Equal(other *File) bool {
 // FileMode will return an os.FileMode version of our string encoded "Mode" member
 func (f *File) FileMode() os.FileMode {
 	return os.FileMode(f.Mode)
+}
+
+// Verify reads the copy of this file from disk, hashes it, and compares for the correct hash
+func (f *File) Verify(path string) error {
+	dstPath := filepath.Join(path, f.Path)
+	info, err := os.Lstat(dstPath)
+	if err != nil {
+		return err
+	}
+	if sz := info.Size(); sz != f.Size {
+		return fmt.Errorf("'%s' size mismatch: %d != %d", f.Path, sz, f.Size)
+	}
+	if m := info.Mode().Perm(); m != f.FileMode() {
+		return fmt.Errorf("'%s' permission mismatch: %d != %d", f.Path, m, f.Mode)
+	}
+	stat := info.Sys().(*syscall.Stat_t)
+	if stat.Uid != uint32(f.UID) {
+		return fmt.Errorf("'%s' UID mismatch: %d != %d", f.Path, stat.Uid, uint32(f.UID))
+	}
+	if stat.Gid != uint32(f.GID) {
+		return fmt.Errorf("'%s' GID mismatch: %d != %d", f.Path, stat.Gid, uint32(f.GID))
+	}
+	var in io.Reader
+	if mode := info.Mode(); !mode.IsRegular() {
+		if (mode & os.ModeSymlink) != os.ModeSymlink {
+			return nil
+		}
+		name, err := os.Readlink(dstPath)
+		if err != nil {
+			return err
+		}
+		in = bytes.NewBuffer([]byte(name))
+	} else {
+		dst, err := os.Open(dstPath)
+		if err != nil {
+			return err
+		}
+		defer dst.Close()
+		in = dst
+	}
+	h := sha1.New()
+	if _, err := io.Copy(h, in); err != nil {
+		return err
+	}
+	sum := fmt.Sprintf("%x", h.Sum(nil))
+	if sum != f.Hash {
+		return fmt.Errorf("'%s' hash mismatch: %s != %s", f.Path, sum, f.Hash)
+	}
+	return nil
 }
 
 // ReadFiles will read the `files.xml` file within the archive and

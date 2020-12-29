@@ -26,12 +26,14 @@
 
 ## Required for sol
 
- - [ ] Read in the the index
- - [ ] Installation
-    - [ ] Unpack tar to directory
-    - [ ] Verify files during/after writing to disk
-    - [ ] Set file characteristics from `files.xml`
+ - [x] Read in the the index
+ - [x] Installation
+    - [x] Unpack tar to directory
+    - [x] Verify files during/after writing to disk (now with symlinks)
+    - [x] Set file characteristics from `files.xml` (skip because TAR is better)
+    - [x] Install metadata files to different directory
  - [ ] Upgrades
     - [ ] Handle Delta Installation
  - [ ] Removals
     - [ ] Calculating Deletions from `files.xml`
+ - [x] Verify files after installation (eopkg check)

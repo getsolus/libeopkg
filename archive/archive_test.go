@@ -92,3 +92,18 @@ func TestArchiveFiles(t *testing.T) {
 		t.Fatalf("Invalid file mode on nano: %s", wanted.Mode.String())
 	}
 }
+
+func TestArchiveUnpack(t *testing.T) {
+	pkg, err := Open(eopkgTestFile)
+	if err != nil {
+		t.Fatalf("Error opening valid .eopkg file: %v", err)
+	}
+	defer pkg.Close()
+	if err = pkg.Unpack("TESTING", "TESTING/install"); err != nil {
+		t.Fatalf("Could not unpack .eopkg file: %v", err)
+	}
+	if err = pkg.Verify("TESTING/install"); err != nil {
+		t.Fatalf("Verification failed: %v", err)
+	}
+	os.RemoveAll("TESTING")
+}
