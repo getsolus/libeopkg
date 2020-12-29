@@ -35,5 +35,5 @@ func TestSave(t *testing.T) {
 	if err = i.Save("TESTING"); err != nil {
 		t.Errorf("Should have saved successfully: %s", err)
 	}
-	//os.RemoveAll("TESTING")
+	os.RemoveAll("TESTING")
 }

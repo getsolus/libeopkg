@@ -18,14 +18,14 @@
 
 ``` XML
 <Distribution>
-    <SourceName>Solus
+    <SourceName> Solus
     <Description>
         ... one or more
         @lang
         CDATA: Solus Repository
-    <Version>1
-    <Type>main
-    <BinaryName>Solus
+    <Version> 1
+    <Type> main
+    <BinaryName> Solus
     <Obsoletes>
 ```
 
@@ -48,29 +48,41 @@
     <Description>
         @xml:lang
         CDATA:
+    <IsA> Legacy, only used by PiSi
     <PartOf>game.strategy
         ... name of a <Component>
     <License> BSD-2-Clause
         ... one or more
     <RuntimeDependencies>
+    <Replaces>
+    		... omit if empty
+    		... one or more packages
+    		<Package>
+	<Conflicts>
+		... omit if empty
+		... one or more packages
+		<Package>
+	<Provides>
     <History>
-    <BuildHost>solus
-    <Distribution>Solus
-    <DistributionRelease>1
-    <Architecture>x86_64
-    <InstalledSize>9755641
-    <PackageSize>2812298
-    <PackageHash>37c9f2159869d8da09786d3646c5c26e8e8204d3
+    <BuildHost> solus
+    <Distribution> Solus
+    <DistributionRelease> 1
+    <Architecture> x86_64
+    <InstalledSize> 9755641
+    <PackageSize> 2812298
+    <PackageHash> 37c9f2159869d8da09786d3646c5c26e8e8204d3
         SHA1SUM
-    <PackageURI>0/0ad/0ad-0.0.23b-27-1-x86_64.eopkg
+    <PackageURI> 0/0ad/0ad-0.0.23b-27-1-x86_64.eopkg
     <DeltaPackages>
-    <PackageFormat>1.2
+    <PackageFormat> 1.2
     <Source>
         <Name>0ad
         <Packager>
             <Name>Pierre-Yves
             <Email>
 ```
+
+---
 
 ### RuntimeDependencies
 
@@ -82,6 +94,26 @@
             number of the release
         libsodium
 ```
+
+---
+
+### Provides
+
+``` XML
+<Provides>
+	... omit if empty
+	<COMAR>
+		... zero or more
+		Name of a COMAR handler
+	<PkgConfig>
+		... zero or more
+		Name of a 64-bit pkgconfig
+	<PkgConfig32>
+		... zero or more
+		Name of a 32-bit pkgconfig
+```
+
+---
 
 ### History
 
@@ -95,21 +127,25 @@
         <Version>0.0.23b
         <Comment>
             CDATA: Rebuild 0ad for libboost 1.72.0
-        <Name> Pierre-Yves
+        <Name>
+            CDATA: Pierre-Yves
         <Email>
 ```
+
+---
 
 ### DeltaPackages
 
 ```XML
 <DeltaPackages>
+	... omit if empty
     <Delta>
         ... zero or more
         @releaseFrom 25
             number of the release
-        <PackageURI>0/0ad/0ad-25-27-1-x86_64.delta.eopkg
-        <PackageSize>2303734
-        <PackageHash>d0e61c3e043d9550a382af7a3a4146ce2e58c8de
+        <PackageURI> 0/0ad/0ad-25-27-1-x86_64.delta.eopkg
+        <PackageSize> 2303734
+        <PackageHash> d0e61c3e043d9550a382af7a3a4146ce2e58c8de
             SHA1SUM
 ```
 
@@ -130,22 +166,22 @@
         ... one or more
         @xml:lang en
         CDATA: Database clients and servers
-    <Group>system
+    <Group> system
         Name of Group
     <Maintainer>
-        <Name>Solus Team
-        <Email>root@solus-project.com
+        <Name> Solus Team
+        <Email> root@solus-project.com
 ```
 
 ## Groups
 
 ``` XML
 <Group>
-    <Name>security
+    <Name> security
     <LocalName>
         ... one or more
         @xml:lang en
         CDATA: Security Software
-    <Icon>security-high
+    <Icon> security-high
         entry somewhere in /usr/share/icons
 ```

@@ -1,13 +1,12 @@
 # TODO
 
-## Archive
-
-### General
+## General
 
  - [x] Refactor modePrivate in File so use custom Marshal/Unmarshal instead of private field
  - [x] New Diff for Files when generating Deltas
+ - [x] Refresh documentation after fighting with the XML parser
 
-### Required for ferryd
+## Required for ferryd
 
  - [x] Extract `files.xml` and `metadata.xml`
  - [x] Generate Deltas
@@ -17,7 +16,7 @@
     - [x] Build a package from differences
  - [x] Write, compress, and sha1sum Index
 
-### Required for ypkg3
+## Required for ypkg3
 
  - [ ] Build a package
     - [ ] Generate and compress tarball from the contents of a directory
@@ -25,7 +24,7 @@
     - [ ] Writing Metadata to `metadata.xml`
     - [ ] Updating `pspec_x86_64.xml`
 
-### Required for sol
+## Required for sol
 
  - [ ] Read in the the index
  - [ ] Installation

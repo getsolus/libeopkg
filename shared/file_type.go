@@ -24,6 +24,8 @@ const (
 	FileConfig FileType = "config"
 	// FileData is a data file (catch-all)
 	FileData = "data"
+	// FileDoc is a piece of documentation for the package or its contents
+	FileDoc = "doc"
 	// FileExecutable is an executable binary or script
 	FileExecutable = "executable"
 	// FileHeader is a header file for a compiled language (e.g. C/C++)
@@ -34,4 +36,6 @@ const (
 	FileLibrary = "library"
 	// FileLocale is the locale data used to translate applications
 	FileLocale = "localedata"
+	// FileMan is a manpage used for the "man" help system
+	FileMan = "man"
 )

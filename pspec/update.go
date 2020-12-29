@@ -16,15 +16,14 @@
 
 package pspec
 
-import (
-	"encoding/xml"
-	"github.com/getsolus/libeopkg/shared"
-)
-
-// PSpec is the format of the new-er `pspec_x86_64.xml` files
-type PSpec struct {
-	XMLName  xml.Name `xml:"PISI"`
-	Source   shared.Source
-	Packages []Package `xml:"Package>"`
-	History  []Update
+// An Update forms part of a package's history, describing the version, release,
+// etc, for each release of the package.
+type Update struct {
+	Release int    `xml:"release,attr"`
+	Type    string `xml:"type,attr,omitempty"`
+	Date    string
+	Version string
+	Comment string
+	Name    string
+	Email   string
 }
