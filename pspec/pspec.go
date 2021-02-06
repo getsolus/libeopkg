@@ -26,5 +26,5 @@ type PSpec struct {
 	XMLName  xml.Name `xml:"PISI"`
 	Source   shared.Source
 	Packages []Package `xml:"Package"`
-	History  []Update
+	History  []Update  `xml:"History>Update"`
 }
