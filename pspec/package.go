@@ -26,7 +26,7 @@ type Package struct {
 	Summary             shared.LocalisedField
 	Description         shared.LocalisedField
 	PartOf              string
-	Licenses            []string `xml:"License>"`
+	Licenses            []string `xml:"License"`
 	RuntimeDependencies []shared.Dependency
 	Files               []Path
 }
