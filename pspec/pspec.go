@@ -18,6 +18,8 @@ package pspec
 
 import (
 	"encoding/xml"
+	"os"
+
 	"github.com/getsolus/libeopkg/shared"
 )
 
@@ -27,4 +29,18 @@ type PSpec struct {
 	Source   shared.Source
 	Packages []Package `xml:"Package"`
 	History  []Update  `xml:"History>Update"`
+}
+
+// Load reads the pspec from a file
+func Load(path string) (p *PSpec, err error) {
+	p = &PSpec{}
+	xmlFile, err := os.Open(path)
+	if err != nil {
+		return
+	}
+	defer xmlFile.Close()
+
+	dec := xml.NewDecoder(xmlFile)
+	err = dec.Decode(p)
+	return
 }
