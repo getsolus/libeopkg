@@ -1,3 +1,3 @@
 module github.com/getsolus/libeopkg
 
-go 1.12
+go 1.18

@@ -18,6 +18,7 @@ package index
 
 import (
 	"os"
+	"slices"
 	"testing"
 )
 
@@ -36,4 +37,28 @@ func TestSave(t *testing.T) {
 		t.Errorf("Should have saved successfully: %s", err)
 	}
 	os.RemoveAll("TESTING")
+}
+
+func TestRuntimeDeps(t *testing.T) {
+	i, err := Load(index)
+	if err != nil {
+		t.Fatalf("Should have loaded successfully: %s", err)
+	}
+
+	idx := slices.IndexFunc(i.Packages, func(p Package) bool { return p.Name == "0ad" })
+	if idx == -1 {
+		t.Fatalf("Can't find package 0ad in the index!")
+	}
+
+	found := false;
+	for _, dep := range i.Packages[idx].RuntimeDependencies {
+		t.Log("dep is", dep.Name)
+		if dep.Name == "glibc" {
+			found = true;
+			break
+		}
+	}
+	if !found {
+		t.Fatalf("Failed to find glibc as a dependency of 0ad!")
+	}
 }
